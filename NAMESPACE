@@ -1,0 +1,26 @@
+exportPattern("^[[:alpha:]]+")
+
+useDynLib("hclda")
+
+
+export(hclda)
+export(predict.hclda)
+export(print.hclda)
+export(generate_data_hclda)
+
+export(creasteSS_Rcpp)
+export(computeY_Rcpp)
+export(creasteSS_fast_Rcpp)
+export(loo_CLD_Rcpp)
+export(fast_loo_CLD_Rcpp)
+export(cv_Rcpp)
+export(cv_clustering_Rcpp)
+
+export(computeA)
+
+S3method("predict","hclda")
+S3method("print","hclda")
+
+importFrom("stats", "rnorm", "runif", "var")
+importFrom(Rcpp, evalCpp)
+importFrom(Rcpp, sourceCpp)

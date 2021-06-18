@@ -1,0 +1,14 @@
+Package: hclda
+Type: Package
+Title: Hierarchical clustered linear discriminant analysis
+Version: 0.1.6
+Date: 2021-06-18
+Author: Kanta Miura and Kei Hirose
+Maintainer: Kanta Miura <kantamiura903@gmail.com> and Kei Hirose <mail@keihirose.com>
+Imports: Rcpp
+LinkingTo: Rcpp, RcppArmadillo
+Description: An R package "hclda" Hierarchical clustered linear discriminant analysis.  It can accurately classify data with a large number of groups, which is difficult to be classified with an ordinary linear discriminant analysis.
+License: GPL (>= 2)
+URL: http://www.keihirose.com
+NeedsCompilation: yes
+Packaged: 2021-06-18 00:45:46 UTC; hirosekei
