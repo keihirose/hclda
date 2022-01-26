@@ -113,9 +113,12 @@ mat computeY_Rcpp(
     vec eigval;
     mat eigvec;
     mat diagp = eye(p,p);
-    eig_sym(eigval, eigvec, W + r * diagp);  // 固有値は小さい順であることに注意
+    eig_sym(eigval, eigvec, 0.5*(W+W.t()) + r * diagp);  // 固有値は小さい順であることに注意
+    //eig_sym(eigval, eigvec, W + r * diagp);  // 固有値は小さい順であることに注意、上記は数値誤差を解消するため
     mat Winv_half = eigvec * diagmat(pow(abs(eigval), -0.5)) * eigvec.t();
-    eig_sym(eigval, eigvec, Winv_half * B * Winv_half);
+    eig_sym(eigval, eigvec, 0.5* Winv_half * (B+B.t()) * Winv_half.t());
+    //eig_sym(eigval, eigvec, Winv_half * B * Winv_half);
+    // //eig_sym(eigval, eigvec, Winv_half * B_loo * Winv_half);
     mat hat_T = Winv_half * eigvec; //射影ベクトル A[,d]でd番目の固有ベクトル
     vec Val = eigval;
     
@@ -303,9 +306,11 @@ List loo_CLD_Rcpp(mat test_dat,
     vec eigval;
     mat eigvec;
     mat diagp = eye(p,p);
-    eig_sym(eigval, eigvec, W_loo + r * diagp);  // 固有値は小さい順であることに注意
+    eig_sym(eigval, eigvec, 0.5*(W_loo+W_loo.t()) + r * diagp);  // 固有値は小さい順であることに注意
+    //eig_sym(eigval, eigvec, W_loo + r * diagp);  // 固有値は小さい順であることに注意、上記は数値誤差を解消するため
     mat Winv_half = eigvec * diagmat(pow(abs(eigval), -0.5)) * eigvec.t();
-    eig_sym(eigval, eigvec, Winv_half * B_loo * Winv_half);
+    eig_sym(eigval, eigvec, 0.5* Winv_half * (B_loo+B_loo.t()) * Winv_half.t());
+    //eig_sym(eigval, eigvec, Winv_half * B_loo * Winv_half);
     mat A = Winv_half * eigvec; //射影ベクトル A[,d]でd番目の固有ベクトル
     vec Val = eigval;
     

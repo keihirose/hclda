@@ -11,7 +11,8 @@ This function gives us hierarchical clustered linear discriminant analysis.
 It can accurately classify data with a large number of groups, which is difficult to be classified with an ordinary linear discriminant analysis.
 }
 \usage{
-hclda(lab, datx, r, N.press, type = "exact", hierarchy = TRUE, trace = TRUE)
+hclda(lab, datx, r, N.press, type = "exact", hierarchy = "cv", 
+      parallel=FALSE, max.cores=10, trace = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -31,7 +32,13 @@ hclda(lab, datx, r, N.press, type = "exact", hierarchy = TRUE, trace = TRUE)
   Either \code{"exact"} or \code{"fast"}. If \code{"exact"}, the exact cross-validation value is computed.  The exact calculation becomes slow when the number of dimension of the observation is large.  In such cases, \code{"fast"} is much faster but the approximation is made.  The approximation error is small when the number of observations is sufficiently large.
   }
   \item{hierarchy}{
-  If \code{TRUE}, the hierarchical clustering is conducted.  Otherwise, the ordinary LDA with cross-validation is performed.
+  If \code{"cv"}, the hierarchical clustering is performed by cross-validation.  If \code{"ward"}, the Ward's method is conducted. If \code{"none"}, the ordinary LDA with cross-validation is performed.
+  }
+  \item{parallel}{
+  If \code{TRUE}, the parallel computing is performed.
+  }
+  \item{max.cores}{
+  Maximum number of CPU cores. Only for \code{parallel=TRUE}.
   }
   \item{trace}{
   If \code{TRUE}, tracing information is printed.  Default is \code{TRUE}.
@@ -83,15 +90,7 @@ Kanta Miura <\email{kantamiura903@gmail.com}> and Kei Hirose <\email{mail@keihir
 \examples{
 #generate data
 set.seed(1)
-p = 20
-bar.x_samp =cbind(
-  c1 = c(rep(2,p/2), rep(0,p/2)),
-  c2 = c(rep(0,p/2), rep(2,p/2)),
-  c3 = c(rep(-1,p/2), rep(sqrt(3),p/2)),
-  c4 = c(rep(-1,p/2), rep(-sqrt(3),p/2)),
-  c5 = c(rep(0,p/2), rep(-2,p/2))
-)
-dat <- generate_data_hclda(N=500, bar.x_samp) #generate dataset
+dat <- generate_data_hclda(N=500) #generate dataset with 500 observations
 lab <-  dat$lab
 datx <-  as.matrix(dat$datx)
 
@@ -102,7 +101,7 @@ fit
 fit.fast
 
 #prediction
-newdata <- generate_data_hclda(N=100, bar.x_samp)
+newdata <- generate_data_hclda(N=100)
 newx <- newdata$datx
 pred <- predict(fit, newx)
 pred

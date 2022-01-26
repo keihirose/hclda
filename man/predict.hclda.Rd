@@ -49,15 +49,7 @@ Kanta Miura <\email{kantamiura903@gmail.com}> and Kei Hirose <\email{mail@keihir
 \examples{
 #generate data
 set.seed(1)
-p = 20
-bar.x_samp =cbind(
-  c1 = c(rep(2,p/2), rep(0,p/2)),
-  c2 = c(rep(0,p/2), rep(2,p/2)),
-  c3 = c(rep(-1,p/2), rep(sqrt(3),p/2)),
-  c4 = c(rep(-1,p/2), rep(-sqrt(3),p/2)),
-  c5 = c(rep(0,p/2), rep(-2,p/2))
-)
-dat <- generate_data_hclda(N=500, bar.x_samp) #generate dataset
+dat <- generate_data_hclda(N=500) #generate dataset
 lab <-  dat$lab
 datx <-  as.matrix(dat$datx)
 
@@ -68,7 +60,7 @@ fit
 fit.fast
 
 #prediction
-newdata <- generate_data_hclda(N=100, bar.x_samp)
+newdata <- generate_data_hclda(N=100)
 newx <- newdata$datx
 pred <- predict(fit, newx)
 pred

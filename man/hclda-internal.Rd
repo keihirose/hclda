@@ -9,6 +9,7 @@
 \alias{cv_Rcpp}
 \alias{cv_clustering_Rcpp}
 \alias{computeA}
+\alias{parhclda}
 \description{Internal hclda Functions}
 %\usage{
 %Cov_beta(gam, xx, beta)

@@ -1,4 +1,14 @@
 generate_data_hclda = function(N,bar.x_samp){
+
+  if(missing(bar.x_samp)){
+    p <- 20
+    bar.x_samp <- cbind(c1 = c(rep(2,p/2), rep(0,p/2)),
+                        c2 = c(rep(0,p/2), rep(2,p/2)),
+                        c3 = c(rep(-1,p/2), rep(sqrt(3),p/2)),
+                        c4 = c(rep(-1,p/2), rep(-sqrt(3),p/2)),
+                        c5 = c(rep(0,p/2), rep(-2,p/2))
+                        )
+  }
   
   p = nrow(bar.x_samp)
   G = ncol(bar.x_samp)

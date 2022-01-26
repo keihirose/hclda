@@ -4,6 +4,7 @@ useDynLib("hclda")
 
 
 export(hclda)
+export(parhclda)
 export(predict.hclda)
 export(print.hclda)
 export(generate_data_hclda)
@@ -21,6 +22,7 @@ export(computeA)
 S3method("predict","hclda")
 S3method("print","hclda")
 
-importFrom("stats", "rnorm", "runif", "var")
+importFrom("stats", "rnorm", "runif", "var", "cutree", "dist", "hclust")
 importFrom(Rcpp, evalCpp)
 importFrom(Rcpp, sourceCpp)
+importFrom("parallel", "detectCores", "makeCluster", "clusterApplyLB", "stopCluster")
